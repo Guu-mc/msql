@@ -205,7 +205,8 @@ public class Utils {
                 CtField[] fields = parameterTypes[i].getDeclaredFields();
                 for (CtField cField : fields) {
                     Object mIgnore = cField.getAnnotation(MIgnore.class);
-                    if(mIgnore == null){
+                    boolean isFinal = Modifier.isFinal(cField.getModifiers());
+                    if(mIgnore == null && !isFinal){
                         Object mID = cField.getAnnotation(MID.class);
                         Object mField = cField.getAnnotation(MField.class);
                         if(mID != null){

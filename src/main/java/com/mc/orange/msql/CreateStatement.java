@@ -85,7 +85,7 @@ public class CreateStatement {
         StringBuilder builder;
         if("int".equals(returnType.getName()) ||
                 "java.lang.Integer".equals(returnType.getName())){
-            builder = new StringBuilder("<script> select count(*) from `");
+            builder = new StringBuilder("<script> select count(1) from `");
         } else {
             builder = new StringBuilder("<script>select * from `");
         }
