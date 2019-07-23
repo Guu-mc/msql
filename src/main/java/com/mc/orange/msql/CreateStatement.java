@@ -218,30 +218,31 @@ public class CreateStatement {
         if(principal_linkage.isEmpty() && field.isEmpty()){
             return "";
         }
-        StringBuilder builder = new StringBuilder("<delete>delete from `");
+        StringBuilder builder = new StringBuilder("delete from `");
         builder.append(table[1])
-                .append("`<where>");
-        deleteSqlWhere(builder, principal_linkage);
-        deleteSqlWhere(builder, field);
-        return builder.append("</where></delete>").toString();
-    }
-
-    private static void deleteSqlWhere(StringBuilder builder, LinkedHashMap<String, String[]> map) {
-        for (String s : map.keySet()) {
-            builder.append("<if test='")
-                    .append(s);
-            if("java.lang.String".equals(map.get(s)[1])){
-                builder.append(" != null and ")
-                        .append(s)
-                        .append(" != \"\"'> and `");
-            } else {
-                builder.append(" != null'> and `");
+                .append("` where ");
+        int i = 0;
+        for (String s : principal_linkage.keySet()) {
+            if(i != 0) {
+                builder.append("and `");
+            }else {
+                builder.append("`");
             }
-            builder.append(map.get(s)[0])
+            builder.append(principal_linkage.get(s)[0])
                     .append("`=#{")
                     .append(s)
-                    .append("}</if>");
+                    .append("} ");
+            i++;
         }
+        for (String s : field.keySet()) {
+            builder.append("and `")
+                    .append(field.get(s)[0])
+                    .append("`=#{")
+                    .append(s)
+                    .append("} ");
+        }
+        builder.setLength(builder.length() - 1);
+        return builder.toString();
     }
-
+//@org.apache.ibatis.annotations.Delete(value={"delete from `sys_role` where id`=#{id}and name`=#{name}"})
 }
