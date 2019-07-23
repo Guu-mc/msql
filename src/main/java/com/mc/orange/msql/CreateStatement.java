@@ -16,7 +16,7 @@ public class CreateStatement {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
         LinkedHashMap<String, String[]> field =  tableAttribute.getField();
-        if(principal_linkage.size() == 0 && field.size() == 0){
+        if(principal_linkage.isEmpty() && field.isEmpty()){
             return "";
         }
         StringBuilder builder = new StringBuilder("insert into `");
@@ -51,7 +51,7 @@ public class CreateStatement {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
         LinkedHashMap<String, String[]> field = tableAttribute.getField();
-        if(principal_linkage.size() == 0 && field.size() == 0){
+        if(principal_linkage.isEmpty() && field.isEmpty()){
             return "";
         }
 
@@ -90,7 +90,7 @@ public class CreateStatement {
             builder = new StringBuilder("<script>select * from `");
         }
         builder.append(table[1]);
-        if(principal_linkage.size() == 0 && field.size() == 0){
+        if(principal_linkage.isEmpty() && field.isEmpty()){
             builder.append("`</script>");
         } else {
             builder.append("`<where>");
@@ -214,33 +214,34 @@ public class CreateStatement {
     public static String deleteSql(TableAttribute tableAttribute) {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
-        if(principal_linkage.size() == 0){
+        LinkedHashMap<String, String[]> field = tableAttribute.getField();
+        if(principal_linkage.isEmpty() && field.isEmpty()){
             return "";
         }
-        StringBuilder builder = new StringBuilder("delete from `");
+        StringBuilder builder = new StringBuilder("<delete>delete from `");
         builder.append(table[1])
-                .append("` where ");
-        int i = 0;
-        for (String s : principal_linkage.keySet()) {
-            if(i != 0){
-                builder.append(" and ");
-            }
+                .append("`<where>");
+        deleteSqlWhere(builder, principal_linkage);
+        deleteSqlWhere(builder, field);
+        return builder.append("</where></delete>").toString();
+    }
+
+    private static void deleteSqlWhere(StringBuilder builder, LinkedHashMap<String, String[]> map) {
+        for (String s : map.keySet()) {
             builder.append("<if test='")
                     .append(s);
-            if("java.lang.String".equals(principal_linkage.get(s)[1])){
+            if("java.lang.String".equals(map.get(s)[1])){
                 builder.append(" != null and ")
                         .append(s)
-                        .append(" != \"\"'> ");
+                        .append(" != \"\"'> and `");
             } else {
-                builder.append(" != null'> `");
+                builder.append(" != null'> and `");
             }
-            builder.append(principal_linkage.get(s)[0])
+            builder.append(map.get(s)[0])
                     .append("`=#{")
                     .append(s)
                     .append("}</if>");
-            i++;
         }
-        return builder.toString();
     }
 
 }
