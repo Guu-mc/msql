@@ -1,9 +1,10 @@
-package com.mc.orange.msql;
+package com.github.mc.msql;
 
-import com.mc.orange.msql.annotations.Group;
-import com.mc.orange.msql.annotations.Having;
-import com.mc.orange.msql.annotations.Order;
-import com.mc.orange.msql.annotations.Restrict;
+import com.github.mc.msql.annotations.Group;
+import com.github.mc.msql.annotations.Order;
+import com.github.mc.msql.annotations.Restrict;
+import com.github.mc.msql.annotations.Having;
+
 import java.util.LinkedHashMap;
 
 public class TableAttribute {

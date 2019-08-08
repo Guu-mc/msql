@@ -1,8 +1,12 @@
-package com.mc.orange.msql.utils;
+package com.github.mc.msql.utils;
 
-import com.mc.orange.msql.TableAttribute;
-import com.mc.orange.msql.annotations.*;
-import com.mc.orange.msql.constant.Case;
+import com.github.mc.msql.annotations.MTable;
+import com.github.mc.msql.annotations.MField;
+import com.github.mc.msql.annotations.MID;
+import com.github.mc.msql.annotations.MIgnore;
+import com.github.mc.msql.TableAttribute;
+import com.github.mc.msql.annotations.*;
+import com.github.mc.msql.constant.Case;
 import javassist.*;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.*;

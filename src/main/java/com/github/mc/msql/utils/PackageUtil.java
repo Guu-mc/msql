@@ -1,4 +1,4 @@
-package com.mc.orange.msql.utils;
+package com.github.mc.msql.utils;
 
 import org.springframework.boot.loader.jar.JarFile;
 import java.io.File;

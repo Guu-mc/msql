@@ -1,10 +1,14 @@
-package com.mc.orange.msql;
+package com.github.mc.msql;
 
-import com.mc.orange.msql.annotations.*;
-import com.mc.orange.msql.constant.Constant;
-import com.mc.orange.msql.constant.Case;
-import com.mc.orange.msql.utils.PackageUtil;
-import com.mc.orange.msql.utils.Utils;
+import com.github.mc.msql.annotations.MInsert;
+import com.github.mc.msql.annotations.MSelect;
+import com.github.mc.msql.annotations.MUpdate;
+import com.github.mc.msql.utils.PackageUtil;
+import com.github.mc.msql.utils.Utils;
+import com.github.mc.msql.annotations.MDelete;
+import com.github.mc.msql.annotations.*;
+import com.github.mc.msql.constant.Constant;
+import com.github.mc.msql.constant.Case;
 import javassist.*;
 import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ConstPool;

@@ -1,12 +1,12 @@
-package com.mc.orange.msql.annotations;
+package com.github.mc.msql.annotations;
 
-import com.mc.orange.msql.constant.Case;
+import com.github.mc.msql.constant.Case;
 import java.lang.annotation.*;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface MDelete {
+public @interface MInsert {
   /**
    * Case 对象属性
    *  值1 -- > 表字段的命名风格 (只支持小驼峰和下划线  默认下划线 )

@@ -1,9 +1,9 @@
-package com.mc.orange.msql;
+package com.github.mc.msql;
 
-import com.mc.orange.msql.annotations.Group;
-import com.mc.orange.msql.annotations.Having;
-import com.mc.orange.msql.annotations.Order;
-import com.mc.orange.msql.annotations.Restrict;
+import com.github.mc.msql.annotations.Group;
+import com.github.mc.msql.annotations.Order;
+import com.github.mc.msql.annotations.Restrict;
+import com.github.mc.msql.annotations.Having;
 import javassist.CtClass;
 import java.util.LinkedHashMap;
 
@@ -51,7 +51,7 @@ public class CreateStatement {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
         LinkedHashMap<String, String[]> field = tableAttribute.getField();
-        if(principal_linkage.isEmpty() && field.isEmpty()){
+        if(principal_linkage.isEmpty() || field.isEmpty()){
             return "";
         }
 

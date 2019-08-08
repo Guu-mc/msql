@@ -1,6 +1,6 @@
-package com.mc.orange.msql.annotations;
+package com.github.mc.msql.annotations;
 
-import com.mc.orange.msql.constant.Case;
+import com.github.mc.msql.constant.Case;
 import java.lang.annotation.*;
 
 @Documented

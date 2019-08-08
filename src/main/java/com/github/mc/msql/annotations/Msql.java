@@ -1,6 +1,6 @@
-package com.mc.orange.msql.annotations;
+package com.github.mc.msql.annotations;
 
-import com.mc.orange.msql.Start;
+import com.github.mc.msql.Start;
 import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 

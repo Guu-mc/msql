@@ -1,11 +1,11 @@
-package com.mc.orange.msql.annotations;
+package com.github.mc.msql.annotations;
 
 import java.lang.annotation.*;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
-public @interface Restrict {
+public @interface Having {
     /**
      * Case 对象属性
      */
@@ -18,5 +18,4 @@ public @interface Restrict {
      *  isAnd : true and, false or
      */
     boolean isAnd() default true;
-
 }

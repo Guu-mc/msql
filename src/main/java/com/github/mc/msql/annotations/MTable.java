@@ -1,4 +1,4 @@
-package com.mc.orange.msql.annotations;
+package com.github.mc.msql.annotations;
 
 import java.lang.annotation.*;
 

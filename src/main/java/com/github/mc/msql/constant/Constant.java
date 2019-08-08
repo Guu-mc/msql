@@ -1,4 +1,4 @@
-package com.mc.orange.msql.constant;
+package com.github.mc.msql.constant;
 
 public class Constant {
     public static final String MINSERT = "com.mc.orange.msql.annotations.MInsert";

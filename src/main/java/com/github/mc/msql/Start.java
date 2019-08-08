@@ -1,6 +1,6 @@
-package com.mc.orange.msql;
+package com.github.mc.msql;
 
-import com.mc.orange.msql.annotations.Msql;
+import com.github.mc.msql.annotations.Msql;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

@@ -1,4 +1,4 @@
-package com.mc.orange.msql.constant;
+package com.github.mc.msql.constant;
 
 public class Case {
         public static final String CAMEL_CASE = "camel-case";
