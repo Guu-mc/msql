@@ -6,7 +6,6 @@ import com.github.mc.msql.annotations.MUpdate;
 import com.github.mc.msql.utils.PackageUtil;
 import com.github.mc.msql.utils.Utils;
 import com.github.mc.msql.annotations.MDelete;
-import com.github.mc.msql.annotations.*;
 import com.github.mc.msql.constant.Constant;
 import com.github.mc.msql.constant.Case;
 import javassist.*;

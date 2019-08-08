@@ -22,11 +22,11 @@ public class Start implements ImportBeanDefinitionRegistrar, ResourceLoaderAware
         if (resourceLoader != null) {
             scanner.setResourceLoader(resourceLoader);
         }
-        assert mAnnoAttrs != null;
-        boolean showSql = mAnnoAttrs.getBoolean("showSql");
-        assert annoAttrs != null;
-        String[] values = annoAttrs.getStringArray("value");
-        MSqlStart.scan(values, showSql);
+        if(mAnnoAttrs != null && annoAttrs != null) {
+            boolean showSql = mAnnoAttrs.getBoolean("showSql");
+            String[] values = annoAttrs.getStringArray("value");
+            MSqlStart.scan(values, showSql);
+        }
     }
 
     @Override
