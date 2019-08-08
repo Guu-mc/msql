@@ -43,7 +43,7 @@
     ![image](./images/20190808023855.png)
 
     ![image](./images/20190808111258.png)
-  * 上述示例结果mapper语句都为:delete from `sys_role` where `id`=#{id} and `name`=#{name}
+  * 上述示例结果mapper语句都为: delete from `sys_role` where `id`=#{id} and `name`=#{name}
   * 注意: MDelete的结果mapper语句,是根据所有参数或所有模板对象属性,进行产生删除条件.
 
 
