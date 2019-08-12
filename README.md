@@ -14,7 +14,7 @@
          </dependency>
 
 
-##* **Instructions:**
+### **Instructions:**
 
   * Add msql annotations to the startup class of the MapperScan annotation to enable msql.
   * Example:
