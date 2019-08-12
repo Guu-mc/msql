@@ -2,9 +2,9 @@
 
 ## **msql introduction:**
 
-    msql is a syntax extension based on the mybatis framework. It focuses on solving hard sql, reducing the complexity of the mapper.xml file and its development and maintenance costs.
-    Compared with the different usage syntax of other ORM frameworks, the use of msql is more concise. The core idea of msql is: template data + interface specification = sql.
-    You can get a clear understanding of the "Template Data + Interface Specification = sql" formula with the following introductory tutorial.
+   * msql is a syntax extension based on the mybatis framework. It focuses on solving hard sql, reducing the complexity of the mapper.xml file and its development and maintenance costs.
+Compared with the different usage syntax of other ORM frameworks, the use of msql is more concise. The core idea of msql is: template data + interface specification = sql.
+You can get a clear understanding of the "Template Data + Interface Specification = sql" formula with the following introductory tutorial.
 
 ### **Import:**
         <dependency>
