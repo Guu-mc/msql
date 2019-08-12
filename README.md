@@ -6,8 +6,15 @@
     Compared with the different usage syntax of other ORM frameworks, the use of msql is more concise. The core idea of msql is: template data + interface specification = sql.
     You can get a clear understanding of the "Template Data + Interface Specification = sql" formula with the following introductory tutorial.
 
+### **Import:**
+        <dependency>
+            <groupId>com.github.guu-mc</groupId>
+            <artifactId>msql</artifactId>
+            <version>1.3</version>
+         </dependency>
 
-## **Instructions:**
+
+##* **Instructions:**
 
   * Add msql annotations to the startup class of the MapperScan annotation to enable msql.
   * Example:

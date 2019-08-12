@@ -6,9 +6,15 @@
     以其他的ORM框架不同的使用语法相比,msql的使用方式更加简洁.msql的核心思想是: 模板数据 + 接口规范 = sql.
     通过下面的入门教程您可以清楚地了解 "模板数据 + 接口规范 = sql" 公式.
 
+### **引入:**
+        <dependency>
+            <groupId>com.github.guu-mc</groupId>
+            <artifactId>msql</artifactId>
+            <version>1.3</version>
+         </dependency>
 
-## **使用:**
 
+### **使用:**
   * 在配置MapperScan注解的启动类中添加Msql注解即可启用msql.
   * 示例:
     ![image](./images/20190808014446.png)

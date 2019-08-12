@@ -24,12 +24,8 @@
         </developer>
     </developers>
     <scm>
-        <connection>
-            scm:git:https://github.com/guu-mc/msql.git
-        </connection>
-        <developerConnection>
-            scm:git:https://github.com/guu-mc/msql.git
-        </developerConnection>
+        <connection>scm:git:https://github.com/guu-mc/msql.git</connection>
+        <developerConnection>scm:git:https://github.com/guu-mc/msql.git</developerConnection>
         <url>https://github.com/guu-mc/msql</url>
         <tag>master</tag>
     </scm>
