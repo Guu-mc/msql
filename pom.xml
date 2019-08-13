@@ -8,7 +8,7 @@
 
     <name>msql</name>
     <version>1.3</version>
-    <description>github-msql</description>
+    <description>msql a syntax extension based on the mybatis framework.</description>
     <url>https://github.com/guu-mc/msql</url>
 
     <licenses>
