@@ -9,5 +9,6 @@ public class Constant {
     public static final String UPDATE = "org.apache.ibatis.annotations.Update";
     public static final String SELECT = "org.apache.ibatis.annotations.Select";
     public static final String DELETE = "org.apache.ibatis.annotations.Delete";
+    public static final String OBJECT_PATH = "java.lang.Object";
 
 }

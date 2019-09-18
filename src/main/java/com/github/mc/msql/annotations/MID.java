@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 public @interface MID {
     /**
-     *  对应数据库 主键名
+     * 对应数据库 主键名
      */
     String value();
 }

@@ -2,9 +2,10 @@ package com.github.mc.msql;
 
 import com.github.mc.msql.annotations.Group;
 import com.github.mc.msql.annotations.Order;
-import com.github.mc.msql.annotations.Restrict;
+import com.github.mc.msql.annotations.Where;
 import com.github.mc.msql.annotations.Having;
 import javassist.CtClass;
+
 import java.util.LinkedHashMap;
 
 /**
@@ -15,8 +16,8 @@ public class CreateStatement {
     public static String insertSql(TableAttribute tableAttribute) {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
-        LinkedHashMap<String, String[]> field =  tableAttribute.getField();
-        if(principal_linkage.isEmpty() && field.isEmpty()){
+        LinkedHashMap<String, String[]> field = tableAttribute.getField();
+        if (principal_linkage.isEmpty() && field.isEmpty()) {
             return "";
         }
         StringBuilder builder = new StringBuilder("insert into `");
@@ -25,7 +26,7 @@ public class CreateStatement {
                 .append("`(");
         for (String s : principal_linkage.keySet()) {
             builder.append("`")
-            .append(principal_linkage.get(s)[0])
+                    .append(principal_linkage.get(s)[0])
                     .append("`,");
             t.append("#{")
                     .append(s)
@@ -51,7 +52,7 @@ public class CreateStatement {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
         LinkedHashMap<String, String[]> field = tableAttribute.getField();
-        if(principal_linkage.isEmpty() || field.isEmpty()){
+        if (principal_linkage.isEmpty() || field.isEmpty()) {
             return "";
         }
 
@@ -83,20 +84,20 @@ public class CreateStatement {
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
         LinkedHashMap<String, String[]> field = tableAttribute.getField();
         StringBuilder builder;
-        if("int".equals(returnType.getName()) ||
-                "java.lang.Integer".equals(returnType.getName())){
+        if ("int".equals(returnType.getName()) ||
+                "java.lang.Integer".equals(returnType.getName())) {
             builder = new StringBuilder("<script> select count(1) from `");
         } else {
             builder = new StringBuilder("<script>select * from `");
         }
         builder.append(table[1]);
-        if(principal_linkage.isEmpty() && field.isEmpty()){
+        if (principal_linkage.isEmpty() && field.isEmpty()) {
             builder.append("`</script>");
         } else {
             builder.append("`<where>");
-            Restrict[] restricts = tableAttribute.getRestricts();
-            selectSqlWhere(builder, principal_linkage, restricts);
-            selectSqlWhere(builder, field, restricts);
+            Where[] wheres = tableAttribute.getWheres();
+            selectSqlWhere(builder, principal_linkage, wheres);
+            selectSqlWhere(builder, field, wheres);
             builder.append("</where>");
             selectSqlOrder(builder, principal_linkage, field, tableAttribute.getOrders());
             selectSqlHaving(builder, principal_linkage, field, tableAttribute.getHavings());
@@ -113,16 +114,16 @@ public class CreateStatement {
         for (int i = 0; i < orders.length; i++) {
             Order order = orders[i];
             String name = principal_linkage.get(order.key())[0];
-            if(name == null) name = field.get(order.key())[0];
-            if(name == null) throw new RuntimeException("order by is not key");
-            if(i == 0) {
+            if (name == null) name = field.get(order.key())[0];
+            if (name == null) throw new RuntimeException("order by is not key");
+            if (i == 0) {
                 builder.append(" order by ");
             }
             builder.append("`")
                     .append(name)
                     .append("` ")
                     .append(order.value());
-            if(i != orders.length-1) {
+            if (i != orders.length - 1) {
                 builder.append(", ");
             }
         }
@@ -135,10 +136,10 @@ public class CreateStatement {
         for (int i = 0; i < havings.length; i++) {
             Having having = havings[i];
             String name = principal_linkage.get(having.key())[0];
-            if(name == null) name = field.get(having.key())[0];
-            if(name == null) throw new RuntimeException("having is not key");
-            if(i != 0) {
-                if(having.isAnd()) {
+            if (name == null) name = field.get(having.key())[0];
+            if (name == null) throw new RuntimeException("having is not key");
+            if (i != 0) {
+                if (having.isAnd()) {
                     builder.append(" and ");
                 } else {
                     builder.append(" or ");
@@ -146,8 +147,8 @@ public class CreateStatement {
             } else {
                 builder.append(" having ");
             }
-            builder.append(having.value().replaceAll("@", "`"+name+"`")
-                    .replaceAll("#", "#{"+having.key()+"}"));
+            builder.append(having.value().replaceAll("@", "`" + name + "`")
+                    .replaceAll("#", "#{" + having.key() + "}"));
         }
 
     }
@@ -159,53 +160,53 @@ public class CreateStatement {
         for (int i = 0; i < groups.length; i++) {
             Group group = groups[i];
             String name = principal_linkage.get(group.key())[0];
-            if(name == null) name = field.get(group.key())[0];
-            if(name == null) throw new RuntimeException("group is not key");
-            if(i == 0) {
+            if (name == null) name = field.get(group.key())[0];
+            if (name == null) throw new RuntimeException("group is not key");
+            if (i == 0) {
                 builder.append(" group by ");
             }
             builder.append("`")
                     .append(name)
                     .append("`");
-            if(i != groups.length-1) {
+            if (i != groups.length - 1) {
                 builder.append(", ");
             }
         }
 
     }
 
-    private static void selectSqlWhere(StringBuilder builder, LinkedHashMap<String, String[]> map, Restrict[] restricts){
+    private static void selectSqlWhere(StringBuilder builder, LinkedHashMap<String, String[]> map, Where[] wheres) {
         for (String s : map.keySet()) {
             builder.append("<if test='")
                     .append(s);
-            if("java.lang.String".equals(map.get(s)[1])){
+            if ("java.lang.String".equals(map.get(s)[1])) {
                 builder.append(" != null and ")
                         .append(s)
                         .append(" != \"\"'> ");
             } else {
                 builder.append(" != null'> ");
             }
-            Restrict restrict = null;
-            for (Restrict t : restricts) {
-                if(s.equals(t.key())) {
-                    restrict = t;
+            Where where = null;
+            for (Where t : wheres) {
+                if (s.equals(t.key())) {
+                    where = t;
                     break;
                 }
             }
-            if(restrict == null){
+            if (where == null) {
                 builder.append("and `")
                         .append(map.get(s)[0])
                         .append("`=#{")
                         .append(s)
                         .append("}</if>");
-            }else {
-                if(restrict.isAnd()) {
+            } else {
+                if (where.isAnd()) {
                     builder.append("and ");
                 } else {
                     builder.append("or ");
                 }
-                builder.append(restrict.value().replaceAll("@", "`"+map.get(s)[0]+"`")
-                                .replaceAll("#", "#{"+s+"}"))
+                builder.append(where.value().replaceAll("@", "`" + map.get(s)[0] + "`")
+                        .replaceAll("#", "#{" + s + "}"))
                         .append("</if>");
             }
         }
@@ -215,7 +216,7 @@ public class CreateStatement {
         String[] table = tableAttribute.getTable();
         LinkedHashMap<String, String[]> principal_linkage = tableAttribute.getPrincipal_linkage();
         LinkedHashMap<String, String[]> field = tableAttribute.getField();
-        if(principal_linkage.isEmpty() && field.isEmpty()){
+        if (principal_linkage.isEmpty() && field.isEmpty()) {
             return "";
         }
         StringBuilder builder = new StringBuilder("delete from `");
@@ -223,9 +224,9 @@ public class CreateStatement {
                 .append("` where ");
         int i = 0;
         for (String s : principal_linkage.keySet()) {
-            if(i != 0) {
+            if (i != 0) {
                 builder.append("and `");
-            }else {
+            } else {
                 builder.append("`");
             }
             builder.append(principal_linkage.get(s)[0])
@@ -244,5 +245,4 @@ public class CreateStatement {
         builder.setLength(builder.length() - 1);
         return builder.toString();
     }
-//@org.apache.ibatis.annotations.Delete(value={"delete from `sys_role` where id`=#{id}and name`=#{name}"})
 }

@@ -2,7 +2,7 @@ package com.github.mc.msql;
 
 import com.github.mc.msql.annotations.Group;
 import com.github.mc.msql.annotations.Order;
-import com.github.mc.msql.annotations.Restrict;
+import com.github.mc.msql.annotations.Where;
 import com.github.mc.msql.annotations.Having;
 
 import java.util.LinkedHashMap;
@@ -13,15 +13,15 @@ public class TableAttribute {
      */
     private String[] table;
     /**
-     * principal_linkage ->  value -- Map - key: 主键字段名字 value: String数组 [0]主键表字段名字 [1] java类型
+     * principal_linkage ->  value -- Map - key: 主键字段名字 value: String数组 [0]主键表字段名字 [1] java数据类型
      */
     private LinkedHashMap<String, String[]> principal_linkage;
     /**
-     * field ->  value -- Map - key: 字段名字 value: String数组 [0]字段表名字 [1] java类型
+     * field ->  value -- Map - key: 字段名字 value: String数组 [0]字段表名字 [1] java数据类型
      */
     private LinkedHashMap<String, String[]> field;
 
-    private Restrict[] restricts;
+    private Where[] wheres;
 
     private Group[] groups;
 
@@ -53,12 +53,12 @@ public class TableAttribute {
         this.field = field;
     }
 
-    public Restrict[] getRestricts() {
-        return restricts;
+    public Where[] getWheres() {
+        return wheres;
     }
 
-    public void setRestricts(Restrict[] restricts) {
-        this.restricts = restricts;
+    public void setWheres(Where[] wheres) {
+        this.wheres = wheres;
     }
 
     public Order[] getOrders() {

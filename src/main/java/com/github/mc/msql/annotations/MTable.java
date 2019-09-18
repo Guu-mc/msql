@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 public @interface MTable {
     /**
-     *  对应数据库 表名
+     * 对应数据库 表名
      */
     String value();
 }

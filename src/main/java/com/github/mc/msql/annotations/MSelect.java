@@ -1,6 +1,5 @@
 package com.github.mc.msql.annotations;
 
-import com.github.mc.msql.constant.Case;
 import java.lang.annotation.*;
 
 @Documented
@@ -8,17 +7,15 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 public @interface MSelect {
     /**
-     * Case 对象属性
-     *  值1 -- > 表字段的命名风格 (只支持小驼峰和下划线  默认下划线 )
-     *  值2 -- > 表名 (默认为 JavaBean 的下划线命名)
+     * 模板对象(mo) class
      */
-    String[] value() default {Case.UNDER_SCORE_CASE, Case.UNDER_SCORE_CASE};
+    Class value() default Object.class;
 
     /**
-     *  条件
-     *  值存放where 内
+     * 条件
+     * 值存放where 内
      */
-    Restrict[] restrict() default {};
+    Where[] where() default {};
 
     Group[] group() default {};
 
@@ -26,8 +23,4 @@ public @interface MSelect {
 
     Order[] order() default {};
 
-    /**
-     * 实例化对象 class
-     */
-    Class pojo() default Object.class;
 }

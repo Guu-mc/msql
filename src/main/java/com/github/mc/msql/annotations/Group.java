@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface Group {
     /**
-     * Case 对象属性
+     * mo 对象属性
      */
     String key();
 }

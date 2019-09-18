@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 public @interface MField {
     /**
-     *  对应数据库 字段名
+     * 对应数据库 字段名
      */
     String value();
 }
